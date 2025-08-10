@@ -9,24 +9,28 @@ namespace Project.Scripts.WorkObjects
         [SerializeField] private EntityData _playerData;
         
         private Contexts _contexts;
-        private Systems _systems;
+        private Systems _updateSystems;
+        private Systems _fixedUpdateSystems;
         
         private void Awake()
         {
             _contexts = Contexts.sharedInstance;
-            _systems = new Systems();
+            _updateSystems = new Systems();
 
-            _systems.Add(new GameInitializationSystem(_contexts.game, _playerData));
-            _systems.Add(new EntityInputSystem(_contexts.game));
-            _systems.Add(new PlayerMoveSystem(_contexts.game));
-            _systems.Initialize();
+            _updateSystems.Add(new GameInitializationSystem(_contexts.game, _playerData));
+            _updateSystems.Add(new EntityInputSystem(_contexts.game));
+            _updateSystems.Add(new PlayerMoveSystem(_contexts.game));
+            
+            _updateSystems.Initialize();
         }
         
-        private void Update() => _systems.Execute();
+        private void Update() => _updateSystems.Execute();
+
+        private void FixedUpdate() => _fixedUpdateSystems.Execute();
 
         private void OnDestroy()
         {
-            _systems.TearDown();
+            _updateSystems.TearDown();
             _contexts.Reset();
         }
     }

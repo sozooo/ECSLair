@@ -17,13 +17,13 @@ namespace Project.Scripts.EntitySystems
         
         public void Execute()
         {
-            foreach (GameEntity _player in _playerGroup)
+            foreach (GameEntity player in _playerGroup)
             {
-                var direction = _player.inputEvent.Direction.normalized;
+                var direction = player.inputEvent.Direction.normalized;
             
                 if (direction != Vector2.zero)
                 {
-                    _player.movable.Transform.position += (Vector3)(direction * _player.movable.Speed * Time.deltaTime);
+                    player.movable.Transform.position += (Vector3)(direction * player.movable.Speed * Time.deltaTime);
                 }
             }
         }
