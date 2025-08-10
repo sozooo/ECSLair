@@ -1,4 +1,4 @@
-using Leopotam.Ecs;
+using Entitas;
 using Project.Scripts.EntitySystems;
 using UnityEngine;
 
@@ -8,30 +8,26 @@ namespace Project.Scripts.WorkObjects
     {
         [SerializeField] private EntityData _playerData;
         
-        private EcsWorld _world;
-        private EcsSystems _systems;
+        private Contexts _contexts;
+        private Systems _systems;
         
         private void Awake()
         {
-            _world = new EcsWorld();
-            _systems = new EcsSystems(_world);
-            
-            _systems
-                .Add(new GameInitializationSystem())
-                .Inject(_playerData);
+            _contexts = Contexts.sharedInstance;
+            _systems = new Systems();
 
-            _systems.Add(new EntityInputSystem());
-            _systems.Add(new PlayerMoveSystem());
-            
-            _systems.Init();
+            _systems.Add(new GameInitializationSystem(_contexts.game, _playerData));
+            _systems.Add(new EntityInputSystem(_contexts.game));
+            _systems.Add(new PlayerMoveSystem(_contexts.game));
+            _systems.Initialize();
         }
         
-        private void Update() => _systems.Run();
+        private void Update() => _systems.Execute();
 
         private void OnDestroy()
         {
-            _systems.Destroy();
-            _world.Destroy();
+            _systems.TearDown();
+            _contexts.Reset();
         }
     }
 }

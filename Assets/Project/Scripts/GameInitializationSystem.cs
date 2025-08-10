@@ -1,25 +1,27 @@
-using Leopotam.Ecs;
-using Project.Scripts.EntityComponents;
+using Entitas;
 using Project.Scripts.WorkObjects;
 using UnityEngine;
 
 namespace Project.Scripts
 {
-    public class GameInitializationSystem : IEcsInitSystem
+    public class GameInitializationSystem : IInitializeSystem
     {
-        private EntityData _playerData;
-        private EcsWorld _world;
-        
-        public void Init()
-        {
-            EcsEntity playerEntity = _world.NewEntity();
-            playerEntity.Get<InputEventComponent>();
-            ref MovableComponent movable = ref playerEntity.Get<MovableComponent>();
-            
-            GameObject playerPrefab = Object.Instantiate(_playerData.Prefab, Vector3.zero, Quaternion.identity);
+        private readonly GameContext _gameContext;
+        private readonly EntityData _playerData;
 
-            movable.Speed = _playerData.DefaultSpeed;
-            movable.Transform = playerPrefab.transform;
+        public GameInitializationSystem(GameContext context, EntityData playerData)
+        {
+            _gameContext = context;
+            _playerData = playerData;
+        }
+        
+        public void Initialize()
+        {
+            GameEntity playerEntity = _gameContext.CreateEntity();
+            GameObject playerPrefab = Object.Instantiate(_playerData.Prefab, Vector3.zero, Quaternion.identity);
+            
+            playerEntity.AddInputEvent(Vector2.zero);
+            playerEntity.AddMovable(playerPrefab.transform, _playerData.DefaultSpeed);
         }
     }
 }

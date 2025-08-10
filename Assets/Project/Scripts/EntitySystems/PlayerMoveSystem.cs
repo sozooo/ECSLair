@@ -1,25 +1,29 @@
-using Leopotam.Ecs;
-using Project.Scripts.EntityComponents;
+using Entitas;
 using UnityEngine;
 
 namespace Project.Scripts.EntitySystems
 {
-    public class PlayerMoveSystem : IEcsRunSystem
+    public class PlayerMoveSystem : IExecuteSystem
     {
-        private EcsFilter<MovableComponent, InputEventComponent> _movableFilter;
+        private readonly IGroup<GameEntity> _playerGroup;
         
-        public void Run()
+        public PlayerMoveSystem(GameContext context)
         {
-            foreach (int i in _movableFilter)
+            _playerGroup = context.GetGroup(
+                GameMatcher.AllOf(
+                    GameMatcher.Movable,
+                    GameMatcher.InputEvent));
+        }
+        
+        public void Execute()
+        {
+            foreach (GameEntity _player in _playerGroup)
             {
-                ref MovableComponent movable = ref _movableFilter.Get1(i);
-                ref InputEventComponent inputEvent = ref _movableFilter.Get2(i);
-
-                var direction = inputEvent.Direction.normalized;
-
+                var direction = _player.inputEvent.Direction.normalized;
+            
                 if (direction != Vector2.zero)
                 {
-                    movable.Transform.position += (Vector3)(direction * movable.Speed * Time.deltaTime);
+                    _player.movable.Transform.position += (Vector3)(direction * _player.movable.Speed * Time.deltaTime);
                 }
             }
         }

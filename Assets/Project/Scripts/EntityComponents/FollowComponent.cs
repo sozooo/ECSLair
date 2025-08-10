@@ -1,9 +1,11 @@
+using Entitas;
 using UnityEngine;
 
 namespace Project.Scripts.EntityComponents
 {
-    public struct FollowComponent
+    [Game]
+    public sealed class FollowComponent : IComponent
     {
-        private Transform _target;
+        public Transform Target;
     }
 }

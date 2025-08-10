@@ -1,8 +1,10 @@
+using Entitas;
 using UnityEngine;
 
 namespace Project.Scripts.EntityComponents
 {
-    public struct MovableComponent
+    [Game]
+    public sealed class MovableComponent : IComponent
     {
         public Transform Transform;
         public float Speed;
