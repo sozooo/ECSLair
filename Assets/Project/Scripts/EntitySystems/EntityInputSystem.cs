@@ -11,7 +11,8 @@ namespace Project.Scripts.EntitySystems
         {
             _inputEntities = context.GetGroup(
                 GameMatcher.AllOf(
-                    GameMatcher.InputEvent));
+                    GameMatcher.InputEvent,
+                    GameMatcher.Movable));
         }
         
         public void Execute()
@@ -21,7 +22,7 @@ namespace Project.Scripts.EntitySystems
             
             foreach (GameEntity iputEntity in _inputEntities)
             {
-                iputEntity.inputEvent.Direction = new Vector2(x, y);
+                iputEntity.movable.Direction = new Vector2(x, y);
             }
         }
     }

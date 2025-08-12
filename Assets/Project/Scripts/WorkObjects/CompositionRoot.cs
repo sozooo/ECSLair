@@ -19,7 +19,7 @@ namespace Project.Scripts.WorkObjects
 
             _updateSystems.Add(new GameInitializationSystem(_contexts.game, _playerData));
             _updateSystems.Add(new EntityInputSystem(_contexts.game));
-            _updateSystems.Add(new PlayerMoveSystem(_contexts.game));
+            _updateSystems.Add(new EntitiesMoveSystem(_contexts.game));
             
             _updateSystems.Initialize();
         }

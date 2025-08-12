@@ -8,5 +8,6 @@ namespace Project.Scripts.EntityComponents
     {
         public Transform Transform;
         public float Speed;
+        public Vector2 Direction;
     }
 }

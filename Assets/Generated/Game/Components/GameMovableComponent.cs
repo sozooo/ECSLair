@@ -11,19 +11,21 @@ public partial class GameEntity {
     public Project.Scripts.EntityComponents.MovableComponent movable { get { return (Project.Scripts.EntityComponents.MovableComponent)GetComponent(GameComponentsLookup.Movable); } }
     public bool hasMovable { get { return HasComponent(GameComponentsLookup.Movable); } }
 
-    public void AddMovable(UnityEngine.Transform newTransform, float newSpeed) {
+    public void AddMovable(UnityEngine.Transform newTransform, float newSpeed, UnityEngine.Vector2 newDirection) {
         var index = GameComponentsLookup.Movable;
         var component = (Project.Scripts.EntityComponents.MovableComponent)CreateComponent(index, typeof(Project.Scripts.EntityComponents.MovableComponent));
         component.Transform = newTransform;
         component.Speed = newSpeed;
+        component.Direction = newDirection;
         AddComponent(index, component);
     }
 
-    public void ReplaceMovable(UnityEngine.Transform newTransform, float newSpeed) {
+    public void ReplaceMovable(UnityEngine.Transform newTransform, float newSpeed, UnityEngine.Vector2 newDirection) {
         var index = GameComponentsLookup.Movable;
         var component = (Project.Scripts.EntityComponents.MovableComponent)CreateComponent(index, typeof(Project.Scripts.EntityComponents.MovableComponent));
         component.Transform = newTransform;
         component.Speed = newSpeed;
+        component.Direction = newDirection;
         ReplaceComponent(index, component);
     }
 

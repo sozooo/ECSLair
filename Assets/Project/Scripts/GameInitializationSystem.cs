@@ -20,8 +20,8 @@ namespace Project.Scripts
             GameEntity playerEntity = _gameContext.CreateEntity();
             GameObject playerPrefab = Object.Instantiate(_playerData.Prefab, Vector3.zero, Quaternion.identity);
             
-            playerEntity.AddInputEvent(Vector2.zero);
-            playerEntity.AddMovable(playerPrefab.transform, _playerData.DefaultSpeed);
+            playerEntity.isInputEvent = true;
+            playerEntity.AddMovable(playerPrefab.transform, _playerData.DefaultSpeed, Vector2.zero);
         }
     }
 }

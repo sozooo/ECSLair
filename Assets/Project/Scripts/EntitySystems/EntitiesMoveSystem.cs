@@ -3,23 +3,22 @@ using UnityEngine;
 
 namespace Project.Scripts.EntitySystems
 {
-    public class PlayerMoveSystem : IExecuteSystem
+    public class EntitiesMoveSystem : IExecuteSystem
     {
         private readonly IGroup<GameEntity> _playerGroup;
         
-        public PlayerMoveSystem(GameContext context)
+        public EntitiesMoveSystem(GameContext context)
         {
             _playerGroup = context.GetGroup(
                 GameMatcher.AllOf(
-                    GameMatcher.Movable,
-                    GameMatcher.InputEvent));
+                    GameMatcher.Movable));
         }
         
         public void Execute()
         {
             foreach (GameEntity player in _playerGroup)
             {
-                var direction = player.inputEvent.Direction.normalized;
+                var direction = player.movable.Direction.normalized;
             
                 if (direction != Vector2.zero)
                 {

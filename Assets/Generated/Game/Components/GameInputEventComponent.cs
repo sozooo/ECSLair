@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Project.Scripts.EntityComponents.InputEventComponent inputEvent { get { return (Project.Scripts.EntityComponents.InputEventComponent)GetComponent(GameComponentsLookup.InputEvent); } }
-    public bool hasInputEvent { get { return HasComponent(GameComponentsLookup.InputEvent); } }
+    static readonly Project.Scripts.EntityComponents.InputEventComponent inputEventComponent = new Project.Scripts.EntityComponents.InputEventComponent();
 
-    public void AddInputEvent(UnityEngine.Vector2 newDirection) {
-        var index = GameComponentsLookup.InputEvent;
-        var component = (Project.Scripts.EntityComponents.InputEventComponent)CreateComponent(index, typeof(Project.Scripts.EntityComponents.InputEventComponent));
-        component.Direction = newDirection;
-        AddComponent(index, component);
-    }
+    public bool isInputEvent {
+        get { return HasComponent(GameComponentsLookup.InputEvent); }
+        set {
+            if (value != isInputEvent) {
+                var index = GameComponentsLookup.InputEvent;
+                if (value) {
+                    var componentPool = GetComponentPool(index);
+                    var component = componentPool.Count > 0
+                            ? componentPool.Pop()
+                            : inputEventComponent;
 
-    public void ReplaceInputEvent(UnityEngine.Vector2 newDirection) {
-        var index = GameComponentsLookup.InputEvent;
-        var component = (Project.Scripts.EntityComponents.InputEventComponent)CreateComponent(index, typeof(Project.Scripts.EntityComponents.InputEventComponent));
-        component.Direction = newDirection;
-        ReplaceComponent(index, component);
-    }
-
-    public void RemoveInputEvent() {
-        RemoveComponent(GameComponentsLookup.InputEvent);
+                    AddComponent(index, component);
+                } else {
+                    RemoveComponent(index);
+                }
+            }
+        }
     }
 }
 
