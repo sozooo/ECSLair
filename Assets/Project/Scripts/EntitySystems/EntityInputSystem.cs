@@ -20,9 +20,9 @@ namespace Project.Scripts.EntitySystems
             float x = Input.GetAxis("Horizontal");
             float y = Input.GetAxis("Vertical");
             
-            foreach (GameEntity iputEntity in _inputEntities)
+            foreach (GameEntity inputEntity in _inputEntities)
             {
-                iputEntity.movable.Direction = new Vector2(x, y);
+                inputEntity.movable.Direction = new Vector2(x, y);
             }
         }
     }

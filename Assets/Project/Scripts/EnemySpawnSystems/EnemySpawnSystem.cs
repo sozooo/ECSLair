@@ -1,7 +1,7 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Entitas;
-using Project.Scripts.WorkObjects;
+using Project.Scripts.EnemySpawnSystems.Data;
 
 namespace Project.Scripts.EnemySpawnSystems
 {
@@ -33,6 +33,11 @@ namespace Project.Scripts.EnemySpawnSystems
         private async UniTask SpawnIteration(CancellationToken token)
         {
             await UniTask.WaitForSeconds(_spawnData.SpawnInterval, cancellationToken: token);
+            
+            if(token.IsCancellationRequested)
+                return;
+            
+            
         }
     }
 }

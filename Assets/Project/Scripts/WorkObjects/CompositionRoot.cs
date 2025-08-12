@@ -1,5 +1,6 @@
 using Entitas;
 using Project.Scripts.EnemySpawnSystems;
+using Project.Scripts.EnemySpawnSystems.Data;
 using Project.Scripts.EntitySystems;
 using UnityEngine;
 
