@@ -1,12 +1,14 @@
-using System.Collections.Generic;
+using System;
+using Project.Scripts.WorkObjects;
 using UnityEngine;
 
 namespace Project.Scripts.EnemySpawnSystems.Data
 {
-    [CreateAssetMenu(fileName = "EnemySpawnData", menuName = "Entity/New EnemySpawnData", order = 51)]
-    public class EnemySpawnData : ScriptableObject
+    [Serializable]
+    public struct EnemySpawnData : ISpawnData
     {
-        [field: SerializeField] public List<SpawnData> SpawnDataList { get; private set; }
-        [field: SerializeField] public float SpawnInterval { get; private set; }
+        [field: SerializeField] public EnemyType Type { get; private set; }
+        [field: SerializeField] public EntityData Enemy { get; private set; }
+        [field: SerializeField] public float Weight { get; private set; }
     }
 }

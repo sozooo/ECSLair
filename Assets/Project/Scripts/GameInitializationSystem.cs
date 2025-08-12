@@ -8,11 +8,13 @@ namespace Project.Scripts
     {
         private readonly GameContext _gameContext;
         private readonly EntityData _playerData;
+        private readonly GameObject _player;
 
-        public GameInitializationSystem(GameContext context, EntityData playerData)
+        public GameInitializationSystem(GameContext context, EntityData playerData, GameObject player)
         {
             _gameContext = context;
             _playerData = playerData;
+            _player = player;
         }
         
         public void Initialize()
@@ -21,7 +23,7 @@ namespace Project.Scripts
             GameObject playerPrefab = Object.Instantiate(_playerData.Prefab, Vector3.zero, Quaternion.identity);
             
             playerEntity.isInputEvent = true;
-            playerEntity.AddMovable(playerPrefab.transform, _playerData.DefaultSpeed, Vector2.zero);
+            playerEntity.AddMovable(_player.transform, _playerData.DefaultSpeed, Vector2.zero);
         }
     }
 }

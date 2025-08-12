@@ -1,21 +1,44 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Entitas;
 using Project.Scripts.EnemySpawnSystems.Data;
+using Project.Scripts.MonoBehaviourSpawner;
+using Project.Scripts.WorkObjects.WeightedPicker;
+using UnityEngine;
 
 namespace Project.Scripts.EnemySpawnSystems
 {
     public class EnemySpawnSystem : IInitializeSystem, ITearDownSystem
     {
         private readonly GameContext _context;
-        private readonly EnemySpawnData _spawnData;
+        private readonly EnemySpawnConfig _spawnConfig;
+        private readonly Spawner _spawner;
+        private readonly WeightedRandomPicker<EnemySpawnData> _picker;
+        private readonly EnemySpawnPointProvider _spawnPointProvider;
+        private readonly Transform _playerTransform;
 
         private CancellationTokenSource _cancellationTokenSource;
         
-        public EnemySpawnSystem(GameContext context, EnemySpawnData spawnData)
+        public EnemySpawnSystem(
+            GameContext context, 
+            EnemySpawnConfig spawnConfig, 
+            EnemySpawnPointProvider provider,
+            Transform player)
         {
             _context = context;
-            _spawnData = spawnData;
+            _spawnConfig = spawnConfig;
+            _spawnPointProvider = provider;
+            _playerTransform = player;
+            
+            _picker = new WeightedRandomPicker<EnemySpawnData>(_spawnConfig.SpawnDataList);
+            var pools = new Dictionary<EnemyType, Pool>();
+
+            foreach (var data in _spawnConfig.SpawnDataList.Where(data => pools.ContainsKey(data.Type) == false))
+                pools.Add(data.Type, new Pool(data.Enemy.Prefab));
+            
+            _spawner = new Spawner(pools);
         }
         
         public void Initialize()
@@ -32,12 +55,19 @@ namespace Project.Scripts.EnemySpawnSystems
 
         private async UniTask SpawnIteration(CancellationToken token)
         {
-            await UniTask.WaitForSeconds(_spawnData.SpawnInterval, cancellationToken: token);
+            await UniTask.WaitForSeconds(_spawnConfig.SpawnInterval, cancellationToken: token);
             
             if(token.IsCancellationRequested)
                 return;
+
+            Vector2 position = _spawnPointProvider.GetSpawnPoint();
+            EnemySpawnData spawnData = _picker.Pick();
+            GameObject enemy = _spawner.Spawn(spawnData.Type, position, Quaternion.identity);
+
+            GameEntity enemyEntity = _context.CreateEntity();
             
-            
+            enemyEntity.AddMovable(enemy.transform, spawnData.Enemy.DefaultSpeed, Vector2.zero);
+            enemyEntity.AddFollow(_playerTransform);
         }
     }
 }
