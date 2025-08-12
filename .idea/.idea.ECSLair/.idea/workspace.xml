@@ -5,24 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ad573b7a-b1b8-4205-9c66-57fe15bcc8e7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Project/Scripts/EntitySystems/FollowSystem.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Project/Scripts/EntitySystems/FollowSystem.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ECSLair/.idea/projectSettingsUpdater.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ECSLair/.idea/projectSettingsUpdater.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Project/Scripts/EnemySpawnSystems.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Project/Scripts/EnemySpawnSystems/EnemySpawnSystem.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Project/Scripts/EnemySpawnSystems/EnemySpawnSystem.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Project/Scripts/WorkObjects/EnemySpawnData.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Project/Scripts/WorkObjects/EnemySpawnData.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ECSLair/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ECSLair/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Novel/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Novel/.idea/discord.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Novel/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Novel/.idea/indexLayout.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Novel/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Generated/Game/Components/GameInputEventComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Generated/Game/Components/GameInputEventComponent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Generated/Game/Components/GameMovableComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Generated/Game/Components/GameMovableComponent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Project/Scripts/EntityComponents/InputEventComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Project/Scripts/EntityComponents/InputEventComponent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Project/Scripts/EntityComponents/MovableComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Project/Scripts/EntityComponents/MovableComponent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Project/Scripts/EntitySystems/EntityInputSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Project/Scripts/EntitySystems/EntityInputSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Project/Scripts/EntitySystems/PlayerMoveSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Project/Scripts/EntitySystems/EntitiesMoveSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Project/Scripts/EntitySystems/PlayerMoveSystem.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Project/Scripts/EntitySystems/EntitiesMoveSystem.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Project/Scripts/GameInitializationSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Project/Scripts/GameInitializationSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Project/Scripts/EntitySystems/EntitiesMoveSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Project/Scripts/EntitySystems/EntitiesMoveSystem.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Project/Scripts/WorkObjects/CompositionRoot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Project/Scripts/WorkObjects/CompositionRoot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Project/Scripts/WorkObjects/EntityData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Project/Scripts/WorkObjects/EntityData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +105,7 @@
       <option name="presentableId" value="Default" />
       <updated>1754853839092</updated>
       <workItem from="1754853840805" duration="1024000" />
-      <workItem from="1754854892137" duration="8118000" />
+      <workItem from="1754854892137" duration="12962000" />
     </task>
     <servers />
   </component>

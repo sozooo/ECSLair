@@ -18,7 +18,7 @@ namespace Project.Scripts.EntitySystems
         {
             foreach (GameEntity player in _playerGroup)
             {
-                var direction = player.movable.Direction.normalized;
+                Vector2 direction = player.movable.Direction.normalized;
             
                 if (direction != Vector2.zero)
                 {
