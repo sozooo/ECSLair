@@ -5,15 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ad573b7a-b1b8-4205-9c66-57fe15bcc8e7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Project/Scripts/EventSystems.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Project/Scripts/EventSystems/Components.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Project/Scripts/EventSystems/Components/OneFrameComponent.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Project/Scripts/EventSystems/Components/OneFrameComponent.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Project/Scripts/EventSystems/OneFrameCleanupSystem.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Project/Scripts/EventSystems/OneFrameCleanupSystem.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Project/Scripts/PlayerInputSystems.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Project/Scripts/PlayerInputSystems/PlayerMoveInputSystem.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ECSLair/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ECSLair/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Project/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Project/Scenes/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Generated/Contexts.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Generated/Contexts.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Project/Scripts/EntitySystems/EntityInputSystem.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Project/Scripts/EntitySystems/EntityInputSystem.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Project/Scripts/PlayerInputSystems/PlayerMoveInputSystem.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Project/Scripts/EntitySystems/FollowSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Project/Scripts/EntitySystems/FollowSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Project/Scripts/GameInitializationSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Project/Scripts/GameInitializationSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Project/Scripts/MonoBehaviourSpawner/Pool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Project/Scripts/MonoBehaviourSpawner/Pool.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Project/Scripts/WorkObjects/CompositionRoot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Project/Scripts/WorkObjects/CompositionRoot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Jenny.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Jenny.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +115,7 @@
       <updated>1754853839092</updated>
       <workItem from="1754853840805" duration="1024000" />
       <workItem from="1754854892137" duration="12962000" />
-      <workItem from="1755079831416" duration="7035000" />
+      <workItem from="1755079831416" duration="10865000" />
     </task>
     <servers />
   </component>
@@ -123,6 +129,17 @@
     <option name="unityProjectFolder" value="true" />
   </component>
   <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>

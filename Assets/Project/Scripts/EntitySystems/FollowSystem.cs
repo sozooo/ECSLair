@@ -19,7 +19,7 @@ namespace Project.Scripts.EntitySystems
         {
             foreach (GameEntity follower in _followers)
             {
-                if (follower.hasMovable == false || !follower.hasFollow == false) 
+                if (follower.hasMovable == false || follower.hasFollow == false) 
                     continue;
                 
                 Transform target = follower.follow.Target;
