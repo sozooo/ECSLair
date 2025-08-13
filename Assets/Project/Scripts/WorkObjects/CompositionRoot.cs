@@ -28,6 +28,7 @@ namespace Project.Scripts.WorkObjects
                 .Add(new GameInitializationSystem(_contexts.game, _playerData, player))
                 .Add(new EntityInputSystem(_contexts.game))
                 .Add(new EntitiesMoveSystem(_contexts.game))
+                .Add(new FollowSystem(_contexts.game))
                 .Add(new EnemySpawnSystem(_contexts.game, _spawnConfig, spawnPointProvider, playerTransform));
             
             _updateSystems.Initialize();

@@ -20,12 +20,14 @@ namespace Project.Scripts.MonoBehaviourSpawner
                 instance = Object.Instantiate(_prefab);
             
             instance.transform.SetPositionAndRotation(position, rotation);
+            instance.SetActive(true);
             
             return instance;
         }
 
         public void Release(GameObject instance)
         {
+            instance.SetActive(false);
             _pool.Push(instance);
         }
     }

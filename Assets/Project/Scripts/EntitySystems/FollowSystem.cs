@@ -1,4 +1,5 @@
 using Entitas;
+using UnityEngine;
 
 namespace Project.Scripts.EntitySystems
 {
@@ -11,7 +12,7 @@ namespace Project.Scripts.EntitySystems
             _followers = context
                 .GetGroup(GameMatcher.AllOf(
                     GameMatcher.Follow,
-                    GameMatcher.Follow));
+                    GameMatcher.Movable));
         }
         
         public void Execute()
@@ -21,8 +22,8 @@ namespace Project.Scripts.EntitySystems
                 if (follower.hasMovable == false || !follower.hasFollow == false) 
                     continue;
                 
-                var target = follower.follow.Target;
-                var transform = follower.movable.Transform;
+                Transform target = follower.follow.Target;
+                Transform transform = follower.movable.Transform;
 
                 if (target != null)
                 { 
