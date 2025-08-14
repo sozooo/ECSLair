@@ -4,9 +4,10 @@ using UnityEngine.InputSystem;
 
 namespace Project.Scripts.PlayerInputSystems
 {
-    public class PlayerMoveInputSystem : ISystem
+    public class PlayerMoveInputSystem : IInitializeSystem, ITearDownSystem
     {
         private readonly IGroup<GameEntity> _inputEntities;
+        private readonly PlayerInput _playerInput;
 
         public PlayerMoveInputSystem(GameContext context, PlayerInput playerInput)
         {
@@ -15,7 +16,17 @@ namespace Project.Scripts.PlayerInputSystems
                     GameMatcher.InputEvent,
                     GameMatcher.Movable));
 
-            playerInput.KeyboardAndMouse.Direction.performed += SetDirection;
+            _playerInput = playerInput;
+        }
+        
+        public void Initialize()
+        {
+            _playerInput.KeyboardAndMouse.Direction.performed += SetDirection;
+        }
+
+        public void TearDown()
+        {
+            _playerInput.KeyboardAndMouse.Direction.performed -= SetDirection;
         }
 
         private void SetDirection(InputAction.CallbackContext callbackContext)
