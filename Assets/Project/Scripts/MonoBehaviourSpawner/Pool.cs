@@ -14,7 +14,7 @@ namespace Project.Scripts.MonoBehaviourSpawner
             _pool = new Stack<GameObject>();
         }
         
-        public GameObject Get(Vector3 position, Quaternion rotation)
+        public GameObject Get(Vector2 position, Quaternion rotation)
         {
             if(_pool.TryPop(out GameObject instance) == false)
                 instance = Object.Instantiate(_prefab);

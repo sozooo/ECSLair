@@ -1,4 +1,6 @@
 using Entitas;
+using Project.Scripts.BulletSpawnSystems;
+using Project.Scripts.BulletSpawnSystems.Data;
 using Project.Scripts.EnemySpawnSystems;
 using Project.Scripts.EnemySpawnSystems.Data;
 using Project.Scripts.EntitySystems;
@@ -15,6 +17,7 @@ namespace Project.Scripts.WorkObjects
         [SerializeField] private EntityData _playerData;
         [SerializeField] private EnemySpawnConfig _spawnConfig;
         [SerializeField] private EnemySpawnPointsConfig _spawnPointsConfig;
+        [SerializeField] private BulletConfig _bulletConfig;
         
         private Contexts _contexts;
         private Systems _updateSystems;
@@ -36,7 +39,8 @@ namespace Project.Scripts.WorkObjects
                 .Add(new EnemySpawnSystem(_contexts.game, _spawnConfig, spawnPointProvider, playerTransform));
             
             _reactiveSystems = new Systems()
-                .Add(new OneFrameCleanupSystem(_contexts.events));
+                .Add(new OneFrameCleanupSystem(_contexts.events))
+                .Add(new BulletSpawnSystem(_contexts.events, _contexts.game, _bulletConfig));
             
             _updateSystems.Initialize();
         }

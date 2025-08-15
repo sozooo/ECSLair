@@ -14,7 +14,7 @@ namespace Project.Scripts.EnemySpawnSystems
     {
         private readonly GameContext _context;
         private readonly EnemySpawnConfig _spawnConfig;
-        private readonly Spawner _spawner;
+        private readonly MainEnemySpawner _spawner;
         private readonly WeightedRandomPicker<EnemySpawnData> _picker;
         private readonly EnemySpawnPointProvider _spawnPointProvider;
         private readonly Transform _playerTransform;
@@ -33,12 +33,12 @@ namespace Project.Scripts.EnemySpawnSystems
             _playerTransform = player;
             
             _picker = new WeightedRandomPicker<EnemySpawnData>(_spawnConfig.SpawnDataList);
-            var pools = new Dictionary<EnemyType, Pool>();
+            var spawners = new Dictionary<EnemyType, Spawner>();
 
-            foreach (var data in _spawnConfig.SpawnDataList.Where(data => pools.ContainsKey(data.Type) == false))
-                pools.Add(data.Type, new Pool(data.Enemy.Prefab));
+            foreach (var data in _spawnConfig.SpawnDataList.Where(data => spawners.ContainsKey(data.Type) == false))
+                spawners.Add(data.Type, new Spawner(new Pool(data.Enemy.Prefab)));
             
-            _spawner = new Spawner(pools);
+            _spawner = new MainEnemySpawner(spawners);
         }
         
         public void Initialize()

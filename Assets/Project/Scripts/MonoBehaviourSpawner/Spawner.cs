@@ -1,26 +1,24 @@
-using System.Collections.Generic;
-using Project.Scripts.EnemySpawnSystems.Data;
 using UnityEngine;
 
 namespace Project.Scripts.MonoBehaviourSpawner
 {
     public class Spawner
     {
-        private readonly Dictionary<EnemyType, Pool> _pools;
+        private readonly Pool _pool;
 
-        public Spawner(Dictionary<EnemyType, Pool> pools)
+        public Spawner(Pool pool)
         {
-            _pools = pools;
+            _pool = pool;
         }
         
-        public GameObject Spawn(EnemyType type, Vector3 position, Quaternion rotation)
+        public GameObject Spawn(Vector2 position, Quaternion rotation)
         {
-            return _pools[type].Get(position, rotation);
+            return _pool.Get(position, rotation);
         }
         
-        public void Despawn(EnemyType type, GameObject instance)
+        public void Despawn(GameObject instance)
         {
-            _pools[type].Release(instance);
+            _pool.Release(instance);
         }
     }
 }

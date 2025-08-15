@@ -5,10 +5,12 @@ namespace Project.Scripts.PlayerInputSystems
 {
     public class PlayerShootInputSystem : IInitializeSystem, ITearDownSystem
     {
+        private readonly EventsContext _context;
         private readonly PlayerInput _playerInput;
 
-        public PlayerShootInputSystem(PlayerInput playerInput)
+        public PlayerShootInputSystem(EventsContext context, PlayerInput playerInput)
         {
+            _context = context;
             _playerInput = playerInput;
         }
         
@@ -24,7 +26,7 @@ namespace Project.Scripts.PlayerInputSystems
 
         private void Shoot(InputAction.CallbackContext context)
         {
-            
+            _context.CreateEntity().isOneFrame = true;
         }
     }
 }
