@@ -1,22 +1,24 @@
+using System.ComponentModel;
 using Entitas;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Zenject;
 
 namespace Project.Scripts.PlayerInputSystems
 {
     public class PlayerMoveInputSystem : IInitializeSystem, ITearDownSystem
     {
         private readonly IGroup<GameEntity> _inputEntities;
-        private readonly PlayerInput _playerInput;
+        
+        [Inject] private PlayerInput _playerInput;
+        [Inject] private GameContext _gameContext;
 
-        public PlayerMoveInputSystem(GameContext context, PlayerInput playerInput)
+        public PlayerMoveInputSystem()
         {
-            _inputEntities = context.GetGroup(
+            _inputEntities = _gameContext.GetGroup(
                 GameMatcher.AllOf(
                     GameMatcher.InputEvent,
                     GameMatcher.Movable));
-
-            _playerInput = playerInput;
         }
         
         public void Initialize()

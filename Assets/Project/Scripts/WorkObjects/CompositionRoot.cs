@@ -5,19 +5,23 @@ using Project.Scripts.EnemySpawnSystems;
 using Project.Scripts.EnemySpawnSystems.Data;
 using Project.Scripts.EntitySystems;
 using Project.Scripts.EventSystems;
+using Project.Scripts.Installers;
 using Project.Scripts.PlayerInputSystems;
 using UnityEngine;
+using Zenject;
 
 namespace Project.Scripts.WorkObjects
 {
     public class CompositionRoot : MonoBehaviour
     {
-        private readonly PlayerInput _playerInput = new ();
+        [Inject] private PlayerInput _playerInput;
         
         [SerializeField] private EntityData _playerData;
         [SerializeField] private EnemySpawnConfig _spawnConfig;
         [SerializeField] private EnemySpawnPointsConfig _spawnPointsConfig;
         [SerializeField] private BulletConfig _bulletConfig;
+
+        [SerializeField] private ContextsInstaller _contextsInstaller;
         
         private Contexts _contexts;
         private Systems _updateSystems;
@@ -33,7 +37,7 @@ namespace Project.Scripts.WorkObjects
 
             _updateSystems = new Systems()
                 .Add(new GameInitializationSystem(_contexts.game, _playerData, player))
-                .Add(new PlayerMoveInputSystem(_contexts.game, _playerInput))
+                .Add(new PlayerMoveInputSystem())
                 .Add(new EntitiesMoveSystem(_contexts.game))
                 .Add(new FollowSystem(_contexts.game))
                 .Add(new EnemySpawnSystem(_contexts.game, _spawnConfig, spawnPointProvider, playerTransform));

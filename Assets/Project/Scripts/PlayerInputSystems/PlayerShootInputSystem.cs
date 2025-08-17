@@ -1,17 +1,18 @@
 using Entitas;
 using UnityEngine.InputSystem;
+using Zenject;
 
 namespace Project.Scripts.PlayerInputSystems
 {
     public class PlayerShootInputSystem : IInitializeSystem, ITearDownSystem
     {
         private readonly EventsContext _context;
-        private readonly PlayerInput _playerInput;
+        
+        [Inject] private PlayerInput _playerInput;
 
-        public PlayerShootInputSystem(EventsContext context, PlayerInput playerInput)
+        public PlayerShootInputSystem(EventsContext context)
         {
             _context = context;
-            _playerInput = playerInput;
         }
         
         public void Initialize()
