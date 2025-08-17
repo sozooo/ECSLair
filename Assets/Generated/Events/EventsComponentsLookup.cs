@@ -9,17 +9,20 @@
 public static class EventsComponentsLookup {
 
     public const int BulletSpawnEvent = 0;
-    public const int OneFrame = 1;
+    public const int CollisionEvent = 1;
+    public const int OneFrame = 2;
 
-    public const int TotalComponents = 2;
+    public const int TotalComponents = 3;
 
     public static readonly string[] componentNames = {
         "BulletSpawnEvent",
+        "CollisionEvent",
         "OneFrame"
     };
 
     public static readonly System.Type[] componentTypes = {
         typeof(Project.Scripts.BulletSpawnSystems.Components.BulletSpawnEventComponent),
+        typeof(Project.Scripts.CollisionDamageSystems.Components.CollisionEvent),
         typeof(Project.Scripts.EventSystems.Components.OneFrameComponent)
     };
 }

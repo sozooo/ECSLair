@@ -26,7 +26,10 @@ namespace Project.Scripts.PlayerInputSystems
 
         private void Shoot(InputAction.CallbackContext context)
         {
-            _context.CreateEntity().isOneFrame = true;
+            EventsEntity shootEvent = _context.CreateEntity();
+
+            shootEvent.isOneFrame = true;
+            // shootEvent.AddBulletSpawnEvent();
         }
     }
 }

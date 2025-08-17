@@ -8,21 +8,39 @@
 //------------------------------------------------------------------------------
 public static class GameComponentsLookup {
 
-    public const int Follow = 0;
-    public const int InputEvent = 1;
-    public const int Movable = 2;
+    public const int Bullet = 0;
+    public const int CollisionDamage = 1;
+    public const int Role = 2;
+    public const int Follow = 3;
+    public const int InputEvent = 4;
+    public const int Movable = 5;
+    public const int Health = 6;
+    public const int Weapon = 7;
+    public const int Target = 8;
 
-    public const int TotalComponents = 3;
+    public const int TotalComponents = 9;
 
     public static readonly string[] componentNames = {
+        "Bullet",
+        "CollisionDamage",
+        "Role",
         "Follow",
         "InputEvent",
-        "Movable"
+        "Movable",
+        "Health",
+        "Weapon",
+        "Target"
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(Project.Scripts.BulletSpawnSystems.Components.BulletComponent),
+        typeof(Project.Scripts.CollisionDamageSystems.Components.CollisionDamageComponent),
+        typeof(Project.Scripts.CollisionDamageSystems.Components.RoleComponent),
         typeof(Project.Scripts.EntityComponents.FollowComponent),
         typeof(Project.Scripts.EntityComponents.InputEventComponent),
-        typeof(Project.Scripts.EntityComponents.MovableComponent)
+        typeof(Project.Scripts.EntityComponents.MovableComponent),
+        typeof(Project.Scripts.HealthSystems.Components.HealthComponent),
+        typeof(Project.Scripts.WeaponSystems.Components.WeaponComponent),
+        typeof(TargetComponent)
     };
 }

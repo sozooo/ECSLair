@@ -1,4 +1,5 @@
 using Entitas;
+using Entitas.CodeGeneration.Attributes;
 using UnityEngine;
 
 namespace Project.Scripts.EntityComponents
@@ -6,7 +7,7 @@ namespace Project.Scripts.EntityComponents
     [Game]
     public sealed class MovableComponent : IComponent
     {
-        public Transform Transform;
+        [PrimaryEntityIndex] public Transform Transform;
         public float Speed;
         public Vector2 Direction;
     }

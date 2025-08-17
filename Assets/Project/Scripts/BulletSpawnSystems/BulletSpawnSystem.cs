@@ -26,17 +26,10 @@ namespace Project.Scripts.BulletSpawnSystems
         }
 
         protected override ICollector<EventsEntity> GetTrigger(IContext<EventsEntity> context)
-        {
-            return context.CreateCollector(
-                EventsMatcher.AllOf(
-                    EventsMatcher.OneFrame,
-                    EventsMatcher.BulletSpawnEvent));
-        }
+            => context.CreateCollector(EventsMatcher.BulletSpawnEvent);
 
         protected override bool Filter(EventsEntity entity)
-        {
-            return entity.isOneFrame && entity.hasBulletSpawnEvent;
-        }
+            => entity.isOneFrame && entity.hasBulletSpawnEvent;
 
         protected override void Execute(List<EventsEntity> entities)
         {

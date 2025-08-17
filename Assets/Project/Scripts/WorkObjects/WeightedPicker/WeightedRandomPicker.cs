@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Project.Scripts.WorkObjects.WeightedPicker
@@ -12,7 +13,7 @@ namespace Project.Scripts.WorkObjects.WeightedPicker
         {
             _items = items;
             
-            foreach (var item in _items)
+            foreach (T item in _items)
             {
                 _totalWeight += item.Weight;
             }
@@ -21,12 +22,12 @@ namespace Project.Scripts.WorkObjects.WeightedPicker
         public T Pick()
         {
             if (_items.Count == 0)
-                throw new System.InvalidOperationException("Cannot pick from an empty list.");
+                throw new InvalidOperationException("Cannot pick from an empty list.");
 
             float randomValue = UnityEngine.Random.Range(0f, _totalWeight);
             float cumulativeWeight = 0f;
 
-            foreach (var item in _items)
+            foreach (T item in _items)
             {
                 cumulativeWeight += item.Weight;
                 
