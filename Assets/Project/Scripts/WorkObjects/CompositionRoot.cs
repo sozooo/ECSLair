@@ -1,46 +1,38 @@
 using Entitas;
+using Project.Scopes;
 using Project.Scripts.BulletSpawnSystems;
-using Project.Scripts.BulletSpawnSystems.Data;
 using Project.Scripts.EnemySpawnSystems;
-using Project.Scripts.EnemySpawnSystems.Data;
 using Project.Scripts.EntitySystems;
 using Project.Scripts.EventSystems;
 using Project.Scripts.PlayerInputSystems;
 using UnityEngine;
+using VContainer;
 
 namespace Project.Scripts.WorkObjects
 {
     public class CompositionRoot : MonoBehaviour
     {
-        private readonly PlayerInput _playerInput = new ();
+        [Inject] private PlayerInput _playerInput;
+        [Inject] private GameContext _gameContext;
+        [Inject] private EventsContext _eventsContext;
+
+        [SerializeField] private SystemsScope _systemsScope;
         
-        [SerializeField] private EntityData _playerData;
-        [SerializeField] private EnemySpawnConfig _spawnConfig;
-        [SerializeField] private EnemySpawnPointsConfig _spawnPointsConfig;
-        [SerializeField] private BulletConfig _bulletConfig;
-        
-        private Contexts _contexts;
         private Systems _updateSystems;
         private Systems _reactiveSystems;
         
         private void Awake()
         {
-            _contexts = Contexts.sharedInstance;
-            
-            GameObject player = Instantiate(_playerData.Prefab, Vector3.zero, Quaternion.identity);
-            Transform playerTransform = player.transform;
-            EnemySpawnPointProvider spawnPointProvider = new (_spawnPointsConfig, playerTransform);
-
             _updateSystems = new Systems()
-                .Add(new GameInitializationSystem(_contexts.game, _playerData, player))
-                .Add(new PlayerMoveInputSystem(_contexts.game, _playerInput))
-                .Add(new EntitiesMoveSystem(_contexts.game))
-                .Add(new FollowSystem(_contexts.game))
-                .Add(new EnemySpawnSystem(_contexts.game, _spawnConfig, spawnPointProvider, playerTransform));
-            
+                .Add(_systemsScope.Container.Resolve<GameInitializationSystem>())
+                .Add(_systemsScope.Container.Resolve<PlayerMoveInputSystem>())
+                .Add(_systemsScope.Container.Resolve<EntitiesMoveSystem>())
+                .Add(_systemsScope.Container.Resolve<FollowSystem>())
+                .Add(_systemsScope.Container.Resolve<EnemySpawnSystem>());
+
             _reactiveSystems = new Systems()
-                .Add(new OneFrameCleanupSystem(_contexts.events))
-                .Add(new BulletSpawnSystem(_contexts.events, _contexts.game, _bulletConfig));
+                .Add(_systemsScope.Container.Resolve<OneFrameCleanupSystem>())
+                .Add(_systemsScope.Container.Resolve<BulletSpawnSystem>());
             
             _updateSystems.Initialize();
         }
@@ -55,7 +47,9 @@ namespace Project.Scripts.WorkObjects
         {
             _reactiveSystems.TearDown();
             _updateSystems.TearDown();
-            _contexts.Reset();
+            
+            _gameContext.Reset();
+            _eventsContext.Reset();
         }
     }
 }

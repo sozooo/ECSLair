@@ -1,22 +1,21 @@
 using Entitas;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using VContainer;
 
 namespace Project.Scripts.PlayerInputSystems
 {
     public class PlayerMoveInputSystem : IInitializeSystem, ITearDownSystem
     {
         private readonly IGroup<GameEntity> _inputEntities;
-        private readonly PlayerInput _playerInput;
+        [Inject] private readonly PlayerInput _playerInput;
 
-        public PlayerMoveInputSystem(GameContext context, PlayerInput playerInput)
+        public PlayerMoveInputSystem(GameContext context)
         {
             _inputEntities = context.GetGroup(
                 GameMatcher.AllOf(
                     GameMatcher.InputEvent,
                     GameMatcher.Movable));
-
-            _playerInput = playerInput;
         }
         
         public void Initialize()
