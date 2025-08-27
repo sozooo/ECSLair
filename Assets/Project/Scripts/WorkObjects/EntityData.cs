@@ -6,6 +6,9 @@ namespace Project.Scripts.WorkObjects
     public class EntityData : ScriptableObject
     {
         [field: SerializeField] public GameObject Prefab { get; private set; }
+        [field: SerializeField] public float MaxHealth { get; private set; }
+        [field: SerializeField] public float RegenerationAmount { get; private set; }
+        [field: SerializeField] public float BaseDamage { get; private set; }
         [field: SerializeField] public float DefaultSpeed { get; private set; }
     }
 }

@@ -10,7 +10,7 @@ namespace Project.Scripts.BulletSpawnSystems
     public class BulletSpawnSystem : ReactiveSystem<EventsEntity>
     {
         private readonly GameContext _gameContext;
-        private readonly MainBulletSpawner _bulletSpawner;
+        private readonly MainSpawner<BulletType> _bulletSpawner;
         
         public BulletSpawnSystem(EventsContext eventsContext, GameContext gameContext, BulletConfig config) 
             : base(eventsContext)
@@ -22,7 +22,7 @@ namespace Project.Scripts.BulletSpawnSystems
             foreach (var data in config.BulletDatas.Where(data => spawners.ContainsKey(data.Type) == false))
                 spawners.Add(data.Type, new Spawner(new Pool(data.BulletPrefab)));
             
-            _bulletSpawner = new MainBulletSpawner(spawners);
+            _bulletSpawner = new MainSpawner<BulletType>(spawners);
         }
 
         protected override ICollector<EventsEntity> GetTrigger(IContext<EventsEntity> context)

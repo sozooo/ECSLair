@@ -41,7 +41,7 @@ namespace Project.Scripts.CollisionDamageSystems
                 if (collisionSource.hasRole == false && collisionTarget.hasRole == false)
                     return;
                 
-                (RoleType,RoleType) key = (collisionSource.role.Role, collisionTarget.role.Role);
+                (RoleType, RoleType) key = (collisionSource.role.Role, collisionTarget.role.Role);
                 
                 if(_collisionMatrix.TryGetValue(key, out bool canDamage) && canDamage)
                     DealDamage(collisionSource, collisionTarget);

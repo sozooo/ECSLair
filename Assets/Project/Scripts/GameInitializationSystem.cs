@@ -8,9 +8,9 @@ namespace Project.Scripts
     {
         private readonly GameContext _gameContext;
         private readonly EntityData _playerData;
-        private readonly GameObject _player;
+        private readonly Transform _player;
 
-        public GameInitializationSystem(GameContext context, EntityData playerData, GameObject player)
+        public GameInitializationSystem(GameContext context, EntityData playerData, Transform player)
         {
             _gameContext = context;
             _playerData = playerData;
@@ -22,7 +22,7 @@ namespace Project.Scripts
             GameEntity playerEntity = _gameContext.CreateEntity();
             
             playerEntity.isInputEvent = true;
-            playerEntity.AddMovable(_player.transform, _playerData.DefaultSpeed, Vector2.zero);
+            playerEntity.AddMovable(_player, _playerData.DefaultSpeed, Vector2.zero);
         }
     }
 }

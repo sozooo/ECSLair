@@ -1,3 +1,4 @@
+using System.Linq;
 using Entitas;
 using Project.Scripts.BulletSpawnSystems;
 using Project.Scripts.BulletSpawnSystems.Data;
@@ -12,12 +13,15 @@ namespace Project.Scripts.WorkObjects
 {
     public class CompositionRoot : MonoBehaviour
     {
-        private readonly PlayerInput _playerInput = new ();
+        private readonly PlayerInput _playerInput = new();
         
         [SerializeField] private EntityData _playerData;
         [SerializeField] private EnemySpawnConfig _spawnConfig;
         [SerializeField] private EnemySpawnPointsConfig _spawnPointsConfig;
         [SerializeField] private BulletConfig _bulletConfig;
+
+        [SerializeField] private Transform _player;
+        [SerializeField] private Transform _pLayerGun;
         
         private Contexts _contexts;
         private Systems _updateSystems;
@@ -27,16 +31,18 @@ namespace Project.Scripts.WorkObjects
         {
             _contexts = Contexts.sharedInstance;
             
-            GameObject player = Instantiate(_playerData.Prefab, Vector3.zero, Quaternion.identity);
-            Transform playerTransform = player.transform;
-            EnemySpawnPointProvider spawnPointProvider = new (_spawnPointsConfig, playerTransform);
+            EnemySpawnPointProvider spawnPointProvider = new (_spawnPointsConfig, _player);
+            
+            BulletData playerBulletData = _bulletConfig.BulletDatas
+                .FirstOrDefault(data => data.Type == BulletType.PlayerBullet);
 
             _updateSystems = new Systems()
-                .Add(new GameInitializationSystem(_contexts.game, _playerData, player))
+                .Add(new GameInitializationSystem(_contexts.game, _playerData, _player))
                 .Add(new PlayerMoveInputSystem(_contexts.game, _playerInput))
                 .Add(new EntitiesMoveSystem(_contexts.game))
                 .Add(new FollowSystem(_contexts.game))
-                .Add(new EnemySpawnSystem(_contexts.game, _spawnConfig, spawnPointProvider, playerTransform));
+                .Add(new EnemySpawnSystem(_contexts.game, _spawnConfig, spawnPointProvider, _player))
+                .Add(new PlayerShootInputSystem(_contexts.events, _playerInput, _pLayerGun, playerBulletData));
             
             _reactiveSystems = new Systems()
                 .Add(new OneFrameCleanupSystem(_contexts.events))

@@ -9,9 +9,7 @@ namespace Project.Scripts.EntitySystems
         
         public EntitiesMoveSystem(GameContext context)
         {
-            _playerGroup = context.GetGroup(
-                GameMatcher.AllOf(
-                    GameMatcher.Movable));
+            _playerGroup = context.GetGroup(GameMatcher.Movable);
         }
         
         public void Execute()

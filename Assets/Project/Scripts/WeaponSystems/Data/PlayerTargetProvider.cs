@@ -2,13 +2,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using Project.Scripts.WeaponSystems.Components;
 using UnityEngine;
 
 namespace Project.Scripts.WeaponSystems.Data
 {
     public class PlayerTargetProvider : ITargetProvider
     {
+        private const float Duration = 1f;
+        
         private readonly ScanData _scanData;
         private readonly Collider2D[] _overlapTargets;
         
@@ -24,7 +25,7 @@ namespace Project.Scripts.WeaponSystems.Data
 
         private async UniTask ScanForTarget(CancellationToken token)
         {
-            await UniTask.WaitForSeconds(1, cancellationToken: token);
+            await UniTask.WaitForSeconds(Duration, cancellationToken: token);
             
             int count = Physics2D.OverlapCircleNonAlloc(
                 _scanData.Center.position, 

@@ -5,6 +5,7 @@ using Cysharp.Threading.Tasks;
 using Entitas;
 using Project.Scripts.EnemySpawnSystems.Data;
 using Project.Scripts.MonoBehaviourSpawner;
+using Project.Scripts.WorkObjects;
 using Project.Scripts.WorkObjects.WeightedPicker;
 using UnityEngine;
 
@@ -14,7 +15,7 @@ namespace Project.Scripts.EnemySpawnSystems
     {
         private readonly GameContext _context;
         private readonly EnemySpawnConfig _spawnConfig;
-        private readonly MainEnemySpawner _spawner;
+        private readonly MainSpawner<EnemyType> _spawner;
         private readonly WeightedRandomPicker<EnemySpawnData> _picker;
         private readonly EnemySpawnPointProvider _spawnPointProvider;
         private readonly Transform _playerTransform;
@@ -38,7 +39,7 @@ namespace Project.Scripts.EnemySpawnSystems
             foreach (var data in _spawnConfig.SpawnDataList.Where(data => spawners.ContainsKey(data.Type) == false))
                 spawners.Add(data.Type, new Spawner(new Pool(data.Enemy.Prefab)));
             
-            _spawner = new MainEnemySpawner(spawners);
+            _spawner = new MainSpawner<EnemyType>(spawners);
         }
         
         public void Initialize()
@@ -57,17 +58,20 @@ namespace Project.Scripts.EnemySpawnSystems
         {
             await UniTask.WaitForSeconds(_spawnConfig.SpawnInterval, cancellationToken: token);
             
-            if(token.IsCancellationRequested)
+            if (token.IsCancellationRequested)
                 return;
 
             Vector2 position = _spawnPointProvider.GetSpawnPoint();
             EnemySpawnData spawnData = _picker.Pick();
+            EntityData enemyData = spawnData.Enemy;
             GameObject enemy = _spawner.Spawn(spawnData.Type, position, Quaternion.identity);
 
             GameEntity enemyEntity = _context.CreateEntity();
             
-            enemyEntity.AddMovable(enemy.transform, spawnData.Enemy.DefaultSpeed, Vector2.zero);
+            enemyEntity.AddMovable(enemy.transform, enemyData.DefaultSpeed, Vector2.zero);
             enemyEntity.AddFollow(_playerTransform);
+            enemyEntity.AddHealth(enemyData.MaxHealth, enemyData.MaxHealth, enemyData.RegenerationAmount);
+            enemyEntity.AddCollisionDamage(enemyData.BaseDamage);
         }
     }
 }
